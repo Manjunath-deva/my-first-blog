@@ -1,32 +1,15 @@
-<html>
-    <head>
-        <title>Django Girls blog</title>
-    </head>
-    <body>
-        
-        <div>
-            <h1><a href="/">Django Girls Blog</a></h1>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-{% for post in posts %}
-    <div>
-        <p>published: {{ post.published_date }}</p>
-        <h2><a href="">{{ post.title }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
-    </div>
-{% endfor %}
-
-        <div>
-
-            <p>published: 31.01.2019, 2:30</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Rohit Gurunath Sharma is an Indian international cricketer who is the vice-captain of the India national team in limited-overs formats. He is regarded as one of the best limited overs cricketers in the world. He is a right-handed batsman and was an occasional right-arm off break bowler.</p>
-        </div>
-
-        <div>
-            <p>published: 31.01.2019, 2:30</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Virat Kohli is an Indian international cricketer who currently captains the India national team. A right-handed top-order batsman, Kohli is regarded as one of the best batsmen in the world. He plays for Royal Challengers Bangalore in the Indian Premier League, and has been the team's captain since 2013.</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}    
